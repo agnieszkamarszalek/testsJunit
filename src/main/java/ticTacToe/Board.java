@@ -1,5 +1,7 @@
 package ticTacToe;
 
+import java.util.Arrays;
+
 public class Board {
     String[][] myBoard = new String[3][3];
 
@@ -10,6 +12,10 @@ public class Board {
                 myBoard[i][j] = " ";
             }
         }
+    }
+
+    public Board(String[][] myBoard) {
+        this.myBoard = myBoard;
     }
 
     public boolean takeField(Player player, int X, int Y) {
@@ -31,5 +37,12 @@ public class Board {
         return myBoard;
     }
 
-
+    @Override
+    public String toString() {
+        String arrayString = "";
+        for (String[] row : myBoard) {
+            arrayString += Arrays.toString(row) + "\n";
+        }
+        return arrayString;
+    }
 }

@@ -81,3 +81,22 @@ Gra w Kółko i krzyżyk powinna powinna się składać z następujących klas:
 9. Wykorzystac dla testow junitparams.
 
 10. Sprobowac w wybranych testach wykorzystac mockito.
+
+String nonArtificialPlayer = this.player.getXorO();
+        if(nonArtificialPlayer.equals("X")){
+            this.XorO = "O";
+        }else {
+            this.XorO = "X";
+        }
+
+
+        String[][] givenBoard = new String[3][3];
+                String[] strings = {"X", "X", "X"};
+                Arrays.fill(givenBoard, strings);
+                Board board = new Board(givenBoard);
+                ArtificialPlayer artificialPlayer = new ArtificialPlayer("O",board);
+
+                System.out.println(board.getMyBoard()[0][1]);
+                givenBoard[1][1] = "kk ";
+                System.out.println(board.getMyBoard()[2][1]);
+                int[] expected = {1,1};

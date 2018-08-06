@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Player {
-    Board board;
-    String XorO;
+    private Board board;
+    private String XorO;
 
     public Player(String XorO) {
         this.XorO = XorO;

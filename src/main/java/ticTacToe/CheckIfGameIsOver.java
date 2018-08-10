@@ -8,6 +8,18 @@ public class CheckIfGameIsOver {
         return false;
     }
 
+    public boolean checkAreAllFieldsTaken(String[][] board){
+        board = this.board.getMyBoard();
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[i].length; j++) {
+                if(board[i][j].equals(" ")){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
 
     public String checkIsTheWinner(String[][] myBoard) {
         String winner = " ";

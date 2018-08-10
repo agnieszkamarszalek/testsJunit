@@ -4,6 +4,8 @@ import org.junit.Test;
 import org.mockito.Mockito;
 import ticTacToe.Player;
 
+import java.util.Scanner;
+
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -13,7 +15,10 @@ public class PlayerTest {
     public void shouldMakePlayer() {
         //given
         Player player = new Player("X");
-        //when
+//        Scanner mockScanner = mock(Scanner.class);
+//        player.setScanner(mockScanner);
+//        when(mockScanner.nextLine()).thenReturn("1,1");
+//        //when
 
         //then
         assertThat(player).isNotNull();
@@ -38,4 +43,6 @@ public class PlayerTest {
 
 
     }
+
+
 }

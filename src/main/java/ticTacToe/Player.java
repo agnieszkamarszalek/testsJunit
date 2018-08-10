@@ -1,20 +1,27 @@
 package ticTacToe;
 
-import java.util.List;
+import ticTacToe.exceptions.WrongSignException;
+
 import java.util.Scanner;
 
 public class Player {
     private Board board;
     private String XorO;
 
+    public void setScanner(Scanner scanner) {
+        this.scanner = scanner;
+    }
+
+    Scanner scanner;
+
     public Player(String XorO) {
         this.XorO = XorO;
+        this.scanner = new Scanner(System.in);
     }
 
     public String chooseField(){
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Choose field. Give: x, y");
-        String  field = scanner.nextLine();
+        String  field = this.scanner.nextLine();
         return field;
     }
 

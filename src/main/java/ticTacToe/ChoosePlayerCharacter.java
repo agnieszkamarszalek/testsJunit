@@ -20,7 +20,7 @@ public class ChoosePlayerCharacter {
         do {
             System.out.println("You can be X or O. Choose! ");
             playerCharacter = this.scanner.nextLine().toUpperCase();
-            System.out.println("p" + playerCharacter);
+
             if(!(playerCharacter.equals("X") || playerCharacter.equals("O"))){
                 System.out.println("Choose X or O");
             }

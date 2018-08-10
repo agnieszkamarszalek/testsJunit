@@ -5,12 +5,11 @@ import ticTacToe.exceptions.WrongSignException;
 import java.util.Scanner;
 
 public class ManagerTicTacToe {
-    Board board;
-    Player player;
-    CheckIfGameIsOver checkIfGameIsOver;
-    ArtificialPlayer artificialPlayer;
-    DisplayBoard displayBoard;
-    ChoosePlayerCharacter choosePlayerCharacter;
+    private Board board;
+    private Player player;
+    private CheckIfGameIsOver checkIfGameIsOver;
+    private ArtificialPlayer artificialPlayer;
+    private DisplayBoard displayBoard;
 
     public ManagerTicTacToe(String playerXorPlayerO) {
         this.board = new Board();
@@ -23,7 +22,6 @@ public class ManagerTicTacToe {
         }
 
         this.checkIfGameIsOver = new CheckIfGameIsOver();
-        this.player = player;
         this.displayBoard = new DisplayBoard();
 
     }
@@ -48,14 +46,16 @@ public class ManagerTicTacToe {
         return displayBoard;
     }
 
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
 
+    public void takeMovesFromPlayers(){
 
-
-//    public void takeMovesFromPlayers(){
-//        String input = player.chooseField();
-//        int[] xYtable = player.splitParseMove(input);
-//        int x = xYtable[0];
-//        int y = xYtable[1];
-//        board.takeField()
-//    }
+        String input = player.chooseField();
+        int[] xYtable = player.splitParseMove(input);
+        int x = xYtable[0];
+        int y = xYtable[1];
+        board.takeField(this.player, x, y);
+    }
 }

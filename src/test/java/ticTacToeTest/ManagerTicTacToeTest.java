@@ -37,16 +37,18 @@ public class ManagerTicTacToeTest {
 
         //when
         when(mockPlayer.chooseField()).thenReturn("1,1");
+        when(mockPlayer.getXorO()).thenReturn("X");
         when(mockPlayer
                 .splitParseMove(Mockito.any(String.class)))
                 .thenCallRealMethod();
-        String input = mockPlayer.chooseField();
 
-
-
-       // managerTicTacToe.takeMovesFromPlayers();
+        managerTicTacToe.setPlayer(mockPlayer);
+        managerTicTacToe.takeMovesFromPlayers();
+        String[][] boardToCheck = managerTicTacToe.getBoard().getMyBoard();
+        String fieldToCheck = boardToCheck[1][1];
 
         //then
+        assertThat(fieldToCheck).isEqualTo("X");
 
 
     }

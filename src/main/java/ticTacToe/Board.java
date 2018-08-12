@@ -18,7 +18,7 @@ public class Board {
         this.myBoard = myBoard;
     }
 
-    public boolean takeField(Player player, int X, int Y) {
+    public boolean takeField(PlayersInterface player, int X, int Y) {
         String XorO = player.getXorO();
         if(X >= 0 && X <3 && Y >= 0 && Y < 3){
             if (this.getMyBoard()[X][Y].equals(" ")) {

@@ -1,15 +1,12 @@
 package ticTacToe;
 
-import ticTacToe.exceptions.WrongSignException;
-
-import java.util.Scanner;
-
 public class ManagerTicTacToe {
     private Board board;
     private Player player;
     private CheckIfGameIsOver checkIfGameIsOver;
     private ArtificialPlayer artificialPlayer;
     private DisplayBoard displayBoard;
+
 
     public ManagerTicTacToe(String playerXorPlayerO) {
         this.board = new Board();
@@ -22,8 +19,13 @@ public class ManagerTicTacToe {
         }
 
         this.checkIfGameIsOver = new CheckIfGameIsOver();
-        this.displayBoard = new DisplayBoard();
+        this.displayBoard = new DisplayBoard(board);
 
+    }
+
+    public void setBoard(Board board) {
+        this.artificialPlayer.setBoard(board);
+        this.board = board;
     }
 
     public Board getBoard() {
@@ -50,12 +52,56 @@ public class ManagerTicTacToe {
         this.player = player;
     }
 
-    public void takeMovesFromPlayers(){
+    public void setArtificialPlayer(ArtificialPlayer artificialPlayer) {
+        this.artificialPlayer = artificialPlayer;
+    }
 
-        String input = player.chooseField();
-        int[] xYtable = player.splitParseMove(input);
+    public void playGame(){
+        displayBoard.showBoardWhenPlay();
+        while (true){
+            System.out.println("Your move");
+            takeMoveFromPlayer();
+            displayBoard.showBoardWhenPlay();
+                if(!(" ").equals(checkIfGameIsOver.checkIsTheWinner(this.board.getMyBoard()))){
+                    String isWinner = checkIfGameIsOver.checkIsTheWinner(this.board.getMyBoard());
+                    System.out.println("The winner is " + isWinner);
+                    return;
+                }
+                if(checkIfGameIsOver.checkAreAllFieldsTaken(this.board.getMyBoard())){
+                    System.out.println("Game over.");
+                    return;
+                }
+            System.out.println("Artificial player ");
+            takeMovesFromArtificialPlayer();
+            displayBoard.showBoardWhenPlay();
+                if(!(" ").equals(checkIfGameIsOver.checkIsTheWinner(this.board.getMyBoard()))){
+                    String isWinner = checkIfGameIsOver.checkIsTheWinner(this.board.getMyBoard());
+                    System.out.println("The winner is " + isWinner);
+                    return;
+                }
+                if(checkIfGameIsOver.checkAreAllFieldsTaken(this.board.getMyBoard())){
+                    System.out.println("Game over.");
+                    return;
+                }
+        }
+    }
+
+    public void takeMovesFromArtificialPlayer(){
+        int[] xYtable = artificialPlayer.chooseField();
         int x = xYtable[0];
         int y = xYtable[1];
-        board.takeField(this.player, x, y);
+        board.takeField(this.artificialPlayer, x, y);
+        System.out.println("Artificial player tooks " + x + "," + y);
+    }
+
+    public void takeMoveFromPlayer(){
+
+        boolean isChosenField = false;
+        do {
+            int[] xYtable = player.chooseField();
+            int x = xYtable[0];
+            int y = xYtable[1];
+            isChosenField = board.takeField(this.player, x, y);
+        }while (!isChosenField);
     }
 }

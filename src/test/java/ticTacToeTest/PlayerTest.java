@@ -4,8 +4,6 @@ import org.junit.Test;
 import org.mockito.Mockito;
 import ticTacToe.Player;
 
-import java.util.Scanner;
-
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -31,12 +29,12 @@ public class PlayerTest {
         //given
         Player mockPlayer = mock(Player.class);
         //when
-        when(mockPlayer.chooseField()).thenReturn("1, 1");
+        when(mockPlayer.takeFieldFromPlayer()).thenReturn("1, 1");
         when(mockPlayer
-            .splitParseMove(Mockito.any(String.class)))
+            .chooseField())
             .thenCallRealMethod();
-        String input = mockPlayer.chooseField();
-        int[] checkWhichField = mockPlayer.splitParseMove(input);
+
+        int[] checkWhichField = mockPlayer.chooseField();
 
         //then
         assertThat(checkWhichField).containsExactly(1,1);

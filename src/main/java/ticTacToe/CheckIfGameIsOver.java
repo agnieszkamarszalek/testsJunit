@@ -9,7 +9,7 @@ public class CheckIfGameIsOver {
     }
 
     public boolean checkAreAllFieldsTaken(String[][] board){
-        board = this.board.getMyBoard();
+
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
                 if(board[i][j].equals(" ")){
@@ -37,7 +37,7 @@ public class CheckIfGameIsOver {
                         return winner;
                     }
                     //collumn
-                if(myBoard[k][i].equals(myBoard[k + 1][i]) && myBoard[i+1][i].equals(myBoard[k + 2][i]) && !myBoard[k][i].equals(" ")){
+                if(myBoard[k][i].equals(myBoard[k + 1][i]) && myBoard[k+1][i].equals(myBoard[k + 2][i]) && !myBoard[k][i].equals(" ")){
                     winner = myBoard[i][i];
                     return winner;
                 }

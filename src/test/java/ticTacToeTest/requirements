@@ -76,7 +76,7 @@ Gra w Kółko i krzyżyk powinna powinna się składać z następujących klas:
 
     - sprawdzić, czy wykonuje prawidłowe operacje (utworzenie obiektów i przekazanie ich do zależnych klas) po wybraniu opcji nowej gry
 
-8. Klasę, która uruchamia grę (Main)
+8. Klasę, która uruchamia grę (ticTacToe.Main)
 
 9. Wykorzystac dla testow junitparams.
 

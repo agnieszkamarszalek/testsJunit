@@ -25,7 +25,7 @@ public class Board {
                 getMyBoard()[X][Y] = XorO;
                 return true;
             } else {
-                System.out.println("Field is already taken. Chose another one");
+                System.out.println("Field is already taken. Choose another one");
                 return false;
             }
         }

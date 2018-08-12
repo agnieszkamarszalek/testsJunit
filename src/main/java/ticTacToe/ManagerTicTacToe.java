@@ -97,8 +97,10 @@ public class ManagerTicTacToe {
     public void takeMoveFromPlayer(){
 
         boolean isChosenField = false;
+        int[] xYtable = null;
         do {
-            int[] xYtable = player.chooseField();
+            do { xYtable = player.chooseField(); }
+            while(xYtable.length == 0);
             int x = xYtable[0];
             int y = xYtable[1];
             isChosenField = board.takeField(this.player, x, y);

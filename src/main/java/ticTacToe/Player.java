@@ -31,8 +31,15 @@ public class Player implements PlayersInterface {
     public int[] chooseField() {
         String field = takeFieldFromPlayer();
         String[] results = field.split(",");
+        int[] intsResult = null;
+        try {
+            intsResult = new int[]{Integer.parseInt(results[0].trim()), Integer.parseInt(results[1].trim())};
+        } catch (NumberFormatException e) {
+            System.out.println("Choose field using two numbers! ");
+            intsResult = new int[] {};
+        }
 
-        return new int[] {Integer.parseInt(results[0].trim()), Integer.parseInt(results[1].trim())};
+        return intsResult;
     }
 
     public String takeFieldFromPlayer(){

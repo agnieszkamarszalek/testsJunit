@@ -100,3 +100,65 @@ String nonArtificialPlayer = this.player.getXorO();
                 givenBoard[1][1] = "kk ";
                 System.out.println(board.getMyBoard()[2][1]);
                 int[] expected = {1,1};
+
+
+Code review tego co masz wypchnięte na githubie 😘
+
+1. Board.java
+- myBoard - private
+- takeField -> markField - zaznaczasz pole a nie bierzesz
+- X -> row, Y -> column - te nazwy od razu mówią o co chodzi, X i Y nie są aż tak wymowne, poza tym później masz XorO - czym się te dwa X różnią?
+///////// Player player -> String sign - nie potrzebny Ci gracz, chcesz tylko dać odpowiedni znak
+///////// i następnie trzeba dodać walidację czy znak jest poprawny (X lub O)
+- jest taka metodyka, która nazywa się early exit - chodzi o to, żeby nie robić if(A) { if (B) { if (C) { zrob cos } } } tylko raczej if (!A) { return; } if (!B) { return; } if (!C) { return; } zrob cos; - czyli u Ciebie by było tak:
+
+if (row < 0 || row >= myBoard.length || column < 0 || column >= myBoard[row].length) {
+    System.out.println("Positions out of bounds");
+    return false;
+}
+
+if (!myBoard[row][column].equals(" ")) {
+    return false;
+}
+
+myBoard[row][column] = sign;
+
+2. CheckIfGameIsOver
+- nie wiem czy over to dobre słowo, może lepiej finished?
+- board, player - private
+- checkBoard - co to jest?
+- checkIfTheWinner -> getWinner - zwracasz ten znak więc chyba lepiej napisać co zwracasz, poza tym to chyba taka konwencja bardziej
+//////- String[][] myBoard -> eee, raczej chcesz tu przekazać Board board
+- i -> row, j -> column
+- wygląda na to, że k ma zawsze wartość 0
+ nie korzystasz nigdzie z j (column) - może ten jeden for jest niepotrzebny?
+- collumn - jedno l, i ten komentarz jest trochę przesunięty
+- w tym if po collumn w środku masz zły indeks - myBoard[i+1][i]
+- across nie są zależne ani od i ani od j, może nie ma sensu ich powtarzać w każdej iteracji fora?
+
+3. Player.java
+- board do wywalenia a XorO private
+- chooseField - askForCoordinates
+- splitParseMove - samo parse wystarczy, ale bym dał parseCoordinates
+- splitParseMove - jak koleś da np tylko "1" - to program się wywali w tej metodzie po results[1] będzie poza rozmiarem
+- splitParseMove - jakieś spacje po i przed klamrami?
+- setter dla XorO niepotrzebny - to jest coś co ustawiasz w konstruktorze i nie chcesz tego zmieniać później
+
+4. BoardTests.java
+- shouldMakeNewBoard - notExpectedBoard niepotrzebne, przecież sprawdzasz czy jest równe do expected, nie będzie jednocześnie równe do notExpected, tak samo to isNotNull jest niepotrzebne bo jak będzie tymi pustymi to też nie będzie nullem
+- shouldMakeAmove -> shouldMakeMove - tych 'a' raczej nie używa się w nazwach metod
+- fieldToCHeck -> fieldToCheck
+- check -> verify, raczej w testach używa się słówka verify
+- to expectedBoard w tej metodzie jest niepotrzebne, potrzebujesz tylko String expectedCharacter = "X";
+- shouldNotTakeAwrongFieldOutOfBounds -> shouldNotTakeFieldOutOfBounds
+
+5. CheckIfGameIsOverTest.java
+- Board przyjmuje w konstruktorze String[][] więc skorzystajmy z tego zamiast wołać takeField, w razie jakby ta metoda takeField przestała działać to niepotrzebnie te testy również przestaną działać chociaż w CheckIfGameIsOver nigdzie w niej nie korzystasz
+- shouldInform -> raczej po prostu shouldReturnFalse, jak będziecie robić wzorce projektowe to się dowiesz, że inform to może być np 'rozmawianie' dwóch obiektów ze sobą, jeden będzie informował drugi, że coś się stało. A tutaj po prostu zwracasz wartość z funkcji
+- NobodyWins -> raczej NowbodyWon raczej czas dokonany
+- shouldReturnWinnerIfrowsIsTaken - chyba IfRowIsTaken - to w ogóle dobre miejsce na fora, możesz sprawdzić czy dla każdego rzędu faktycznie zwróci X
+- analogicznie dla ColumnsAreTaken
+
+6. PlayerTest.java
+- tak jak rozmawialiśmy, Scanner powinien być 'wstrzyknięty' jako zależność, której faktycznie nie chcemy testować - to się nazywa dependency injection
+nie chce zmockowac scannera

@@ -3,7 +3,7 @@ package ticTacToe;
 public class ManagerTicTacToe {
     private Board board;
     private Player player;
-    private CheckIfGameIsOver checkIfGameIsOver;
+    private CheckIfGameIsFinished checkIfGameIsOver;
     private ArtificialPlayer artificialPlayer;
     private DisplayBoard displayBoard;
 
@@ -18,7 +18,7 @@ public class ManagerTicTacToe {
             this.artificialPlayer = new ArtificialPlayer("X", board);
         }
 
-        this.checkIfGameIsOver = new CheckIfGameIsOver();
+        this.checkIfGameIsOver = new CheckIfGameIsFinished();
         this.displayBoard = new DisplayBoard(board);
 
     }
@@ -36,7 +36,7 @@ public class ManagerTicTacToe {
         return player;
     }
 
-    public CheckIfGameIsOver getCheckIfGameIsOver() {
+    public CheckIfGameIsFinished getCheckIfGameIsOver() {
         return checkIfGameIsOver;
     }
 
@@ -90,7 +90,7 @@ public class ManagerTicTacToe {
         int[] xYtable = artificialPlayer.chooseField();
         int x = xYtable[0];
         int y = xYtable[1];
-        board.takeField(this.artificialPlayer, x, y);
+        board.markField(this.artificialPlayer, x, y);
         System.out.println("Artificial player tooks " + x + "," + y);
     }
 
@@ -103,7 +103,7 @@ public class ManagerTicTacToe {
             while(xYtable.length == 0);
             int x = xYtable[0];
             int y = xYtable[1];
-            isChosenField = board.takeField(this.player, x, y);
+            isChosenField = board.markField(this.player, x, y);
         }while (!isChosenField);
     }
 }

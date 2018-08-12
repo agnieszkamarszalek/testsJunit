@@ -41,7 +41,7 @@ public class BoardTests {
         Player playerX = new Player("X");
 
         //when
-        board.takeField(playerX, 2, 2);
+        board.markField(playerX, 2, 2);
         String fieldToCHeck = board.getMyBoard()[2][2];
 
         String[][] expectedBoard = new String[3][3];
@@ -61,8 +61,8 @@ public class BoardTests {
         Player playerX = new Player("X");
 
         //when
-        boolean tryTakeField = board.takeField(playerX, 2, 2);
-        boolean tryTakeNextField = board.takeField(playerX, 2,2);
+        boolean tryTakeField = board.markField(playerX, 2, 2);
+        boolean tryTakeNextField = board.markField(playerX, 2,2);
 
         //then
 
@@ -78,7 +78,7 @@ public class BoardTests {
         Player playerX = new Player("X");
 
         //when
-        boolean tryTakeField = board.takeField(playerX, 8, 4);
+        boolean tryTakeField = board.markField(playerX, 8, 4);
 
         //then
         assertThat(tryTakeField).isEqualTo(false);

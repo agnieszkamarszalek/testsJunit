@@ -3,7 +3,7 @@ package ticTacToe;
 import java.util.Arrays;
 
 public class Board {
-    String[][] myBoard = new String[3][3];
+    private String[][] myBoard = new String[3][3];
 
     public Board() {
 
@@ -18,19 +18,23 @@ public class Board {
         this.myBoard = myBoard;
     }
 
-    public boolean takeField(PlayersInterface player, int X, int Y) {
+    public boolean markField(PlayersInterface player, int row, int column) {
+
         String XorO = player.getXorO();
-        if(X >= 0 && X <3 && Y >= 0 && Y < 3){
-            if (this.getMyBoard()[X][Y].equals(" ")) {
-                getMyBoard()[X][Y] = XorO;
-                return true;
-            } else {
-                System.out.println("Field is already taken. Choose another one");
-                return false;
-            }
+
+        if (row < 0 || row > 2 || column < 0 || column > 2 ) {
+            System.out.println("Positions out of bounds");
+            return false;
         }
-        System.out.println("Positions out of bounds");
-        return false;
+
+        if(!" ".equalsIgnoreCase(this.getMyBoard()[row][column])) {
+            System.out.println("Field is already taken. Choose another one");
+            return false;
+        }
+
+        getMyBoard()[row][column] = XorO;
+
+        return true;
     }
 
     public String[][] getMyBoard() {

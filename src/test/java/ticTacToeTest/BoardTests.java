@@ -21,28 +21,21 @@ public class BoardTests {
             }
         }
 
-        String[][] notExpectedBoard = new String[3][3];
-        for (int i = 0; i < notExpectedBoard.length ; i++) {
-            for (int j = 0; j < notExpectedBoard[i].length; j++) {
-                notExpectedBoard[i][j] = "1";
-            }
-        }
         //then
         assertThat(expectedBoard).isEqualTo(board.getMyBoard());
-        assertThat(notExpectedBoard).isNotEqualTo(board.getMyBoard());
         assertThat(board.getMyBoard()).isNotNull();
     }
 
     //czy da sie dodac prawidlowy ruch
     @Test
-    public void shouldMakeAmove(){
+    public void shouldMakeMove(){
         //given
         Board board = new Board();
         Player playerX = new Player("X");
 
         //when
         board.markField(playerX, 2, 2);
-        String fieldToCHeck = board.getMyBoard()[2][2];
+        String fieldToVerify = board.getMyBoard()[2][2];
 
         String[][] expectedBoard = new String[3][3];
         expectedBoard[2][2] = "X";
@@ -50,7 +43,7 @@ public class BoardTests {
 
         //then
 
-        assertThat(fieldToCHeck).isEqualTo(expectedField);
+        assertThat(fieldToVerify).isEqualTo(expectedField);
 
     }
 
@@ -72,7 +65,7 @@ public class BoardTests {
     }
 
     @Test
-    public void shouldNotTakeAwrongFieldOutOfBounds() {
+    public void shouldNotTakeFieldOutOfBounds() {
         //given
         Board board = new Board();
         Player playerX = new Player("X");

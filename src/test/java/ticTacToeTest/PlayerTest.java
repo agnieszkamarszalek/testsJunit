@@ -1,7 +1,6 @@
 package ticTacToeTest;
 
 import org.junit.Test;
-import org.mockito.Mockito;
 import ticTacToe.Player;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -31,10 +30,10 @@ public class PlayerTest {
         //when
         when(mockPlayer.takeFieldFromPlayer()).thenReturn("1, 1");
         when(mockPlayer
-            .chooseField())
+            .chooseCoordinates())
             .thenCallRealMethod();
 
-        int[] checkWhichField = mockPlayer.chooseField();
+        int[] checkWhichField = mockPlayer.chooseCoordinates();
 
         //then
         assertThat(checkWhichField).containsExactly(1,1);

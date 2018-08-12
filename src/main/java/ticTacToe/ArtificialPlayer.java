@@ -20,7 +20,7 @@ public class ArtificialPlayer implements PlayersInterface {
     }
 
     @Override
-    public int[] chooseField() {
+    public int[] chooseCoordinates() {
         String[][] myBoard = board.getMyBoard();
         int i = 0;
         int j = 0;

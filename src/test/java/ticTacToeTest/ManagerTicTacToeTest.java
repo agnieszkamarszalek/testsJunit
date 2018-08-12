@@ -3,7 +3,6 @@ package ticTacToeTest;
 import org.junit.Test;
 
 import org.mockito.InOrder;
-import org.mockito.Mockito;
 import ticTacToe.ArtificialPlayer;
 import ticTacToe.Board;
 import ticTacToe.ManagerTicTacToe;
@@ -38,7 +37,7 @@ public class ManagerTicTacToeTest {
         when(mockPlayer.takeFieldFromPlayer()).thenReturn("1,1");
         when(mockPlayer.getXorO()).thenReturn("X");
         when(mockPlayer
-                .chooseField())
+                .chooseCoordinates())
                 .thenCallRealMethod();
 
         managerTicTacToe.setPlayer(mockPlayer);
@@ -77,17 +76,17 @@ public class ManagerTicTacToeTest {
 
         when(mockPlayer.takeFieldFromPlayer()).thenReturn("1, 1");
         when(mockPlayer
-                .chooseField())
+                .chooseCoordinates())
                 .thenCallRealMethod();
-        when(mockArtificialPlayer.chooseField()).thenReturn(new int[]{1,2});
+        when(mockArtificialPlayer.chooseCoordinates()).thenReturn(new int[]{1,2});
 
         InOrder inOrder = inOrder(mockPlayer, mockArtificialPlayer);
         //when
         managerTicTacToe.playGame();
 
         //then
-        inOrder.verify(mockPlayer).chooseField();
-        inOrder.verify(mockArtificialPlayer).chooseField();
+        inOrder.verify(mockPlayer).chooseCoordinates();
+        inOrder.verify(mockArtificialPlayer).chooseCoordinates();
 
     }
 

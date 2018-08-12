@@ -87,7 +87,7 @@ public class ManagerTicTacToe {
     }
 
     public void takeMovesFromArtificialPlayer(){
-        int[] xYtable = artificialPlayer.chooseField();
+        int[] xYtable = artificialPlayer.chooseCoordinates();
         int x = xYtable[0];
         int y = xYtable[1];
         board.markField(this.artificialPlayer, x, y);
@@ -99,7 +99,7 @@ public class ManagerTicTacToe {
         boolean isChosenField = false;
         int[] xYtable = null;
         do {
-            do { xYtable = player.chooseField(); }
+            do { xYtable = player.chooseCoordinates(); }
             while(xYtable.length == 0);
             int x = xYtable[0];
             int y = xYtable[1];

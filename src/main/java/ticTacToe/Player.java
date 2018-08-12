@@ -23,12 +23,8 @@ public class Player implements PlayersInterface {
         return XorO;
     }
 
-    public void setXorO(String xorO) {
-        XorO = xorO;
-    }
-
     @Override
-    public int[] chooseField() {
+    public int[] chooseCoordinates() {
         String field = takeFieldFromPlayer();
         String[] results = field.split(",");
         int[] intsResult = null;

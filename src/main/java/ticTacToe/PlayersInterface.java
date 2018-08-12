@@ -1,6 +1,6 @@
 package ticTacToe;
 
 public interface PlayersInterface {
-    public int[] chooseField();
+    public int[] chooseCoordinates();
     public String getXorO();
 }

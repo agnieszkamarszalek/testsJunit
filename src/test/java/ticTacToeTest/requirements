@@ -152,6 +152,7 @@ myBoard[row][column] = sign;
 - to expectedBoard w tej metodzie jest niepotrzebne, potrzebujesz tylko String expectedCharacter = "X";
 - shouldNotTakeAwrongFieldOutOfBounds -> shouldNotTakeFieldOutOfBounds
 
+//
 5. CheckIfGameIsOverTest.java
 - Board przyjmuje w konstruktorze String[][] więc skorzystajmy z tego zamiast wołać takeField, w razie jakby ta metoda takeField przestała działać to niepotrzebnie te testy również przestaną działać chociaż w CheckIfGameIsOver nigdzie w niej nie korzystasz
 - shouldInform -> raczej po prostu shouldReturnFalse, jak będziecie robić wzorce projektowe to się dowiesz, że inform to może być np 'rozmawianie' dwóch obiektów ze sobą, jeden będzie informował drugi, że coś się stało. A tutaj po prostu zwracasz wartość z funkcji

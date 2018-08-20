@@ -1,6 +1,6 @@
 package ticTacToe;
 
-public class ArtificialPlayer {
+public class ArtificialPlayer implements PlayersInterface {
     String XorO;
     Board board;
 
@@ -10,11 +10,17 @@ public class ArtificialPlayer {
         this.board = board;
     }
 
+    public void setBoard(Board board) {
+        this.board = board;
+    }
+
+    @Override
     public String getXorO() {
         return XorO;
     }
 
-    public int[] chooseField() {
+    @Override
+    public int[] chooseCoordinates() {
         String[][] myBoard = board.getMyBoard();
         int i = 0;
         int j = 0;

@@ -3,10 +3,6 @@ package ticTacToeTest;
 import org.junit.Test;
 import ticTacToe.ArtificialPlayer;
 import ticTacToe.Board;
-import ticTacToe.Player;
-
-import java.util.Arrays;
-import java.util.stream.Stream;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -35,7 +31,7 @@ public class ArtificialPlayerTest {
         int[] expected = {1,1};
 
         //when
-        int[] ints = artificialPlayer.chooseField();
+        int[] ints = artificialPlayer.chooseCoordinates();
 
         //then
         assertThat(ints).isEqualTo(expected);

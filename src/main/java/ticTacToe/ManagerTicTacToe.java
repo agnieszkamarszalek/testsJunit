@@ -1,16 +1,12 @@
 package ticTacToe;
 
-import ticTacToe.exceptions.WrongSignException;
-
-import java.util.Scanner;
-
 public class ManagerTicTacToe {
-    Board board;
-    Player player;
-    CheckIfGameIsOver checkIfGameIsOver;
-    ArtificialPlayer artificialPlayer;
-    DisplayBoard displayBoard;
-    ChoosePlayerCharacter choosePlayerCharacter;
+    private Board board;
+    private Player player;
+    private CheckIfGameIsFinished checkIfGameIsOver;
+    private ArtificialPlayer artificialPlayer;
+    private DisplayBoard displayBoard;
+
 
     public ManagerTicTacToe(String playerXorPlayerO) {
         this.board = new Board();
@@ -22,10 +18,14 @@ public class ManagerTicTacToe {
             this.artificialPlayer = new ArtificialPlayer("X", board);
         }
 
-        this.checkIfGameIsOver = new CheckIfGameIsOver();
-        this.player = player;
-        this.displayBoard = new DisplayBoard();
+        this.checkIfGameIsOver = new CheckIfGameIsFinished();
+        this.displayBoard = new DisplayBoard(board);
 
+    }
+
+    public void setBoard(Board board) {
+        this.artificialPlayer.setBoard(board);
+        this.board = board;
     }
 
     public Board getBoard() {
@@ -36,7 +36,7 @@ public class ManagerTicTacToe {
         return player;
     }
 
-    public CheckIfGameIsOver getCheckIfGameIsOver() {
+    public CheckIfGameIsFinished getCheckIfGameIsOver() {
         return checkIfGameIsOver;
     }
 
@@ -48,14 +48,62 @@ public class ManagerTicTacToe {
         return displayBoard;
     }
 
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
 
+    public void setArtificialPlayer(ArtificialPlayer artificialPlayer) {
+        this.artificialPlayer = artificialPlayer;
+    }
 
+    public void playGame(){
+        displayBoard.showBoardWhenPlay();
+        while (true){
+            System.out.println("Your move");
+            takeMoveFromPlayer();
+            displayBoard.showBoardWhenPlay();
+                if(!(" ").equals(checkIfGameIsOver.checkIsTheWinner(this.board.getMyBoard()))){
+                    String isWinner = checkIfGameIsOver.checkIsTheWinner(this.board.getMyBoard());
+                    System.out.println("The winner is " + isWinner);
+                    return;
+                }
+                if(checkIfGameIsOver.checkAreAllFieldsTaken(this.board.getMyBoard())){
+                    System.out.println("Game over.");
+                    return;
+                }
+            System.out.println("Artificial player ");
+            takeMovesFromArtificialPlayer();
+            displayBoard.showBoardWhenPlay();
+                if(!(" ").equals(checkIfGameIsOver.checkIsTheWinner(this.board.getMyBoard()))){
+                    String isWinner = checkIfGameIsOver.checkIsTheWinner(this.board.getMyBoard());
+                    System.out.println("The winner is " + isWinner);
+                    return;
+                }
+                if(checkIfGameIsOver.checkAreAllFieldsTaken(this.board.getMyBoard())){
+                    System.out.println("Game over.");
+                    return;
+                }
+        }
+    }
 
-//    public void takeMovesFromPlayers(){
-//        String input = player.chooseField();
-//        int[] xYtable = player.splitParseMove(input);
-//        int x = xYtable[0];
-//        int y = xYtable[1];
-//        board.takeField()
-//    }
+    public void takeMovesFromArtificialPlayer(){
+        int[] xYtable = artificialPlayer.chooseCoordinates();
+        int x = xYtable[0];
+        int y = xYtable[1];
+        board.markField(this.artificialPlayer, x, y);
+        System.out.println("Artificial player tooks " + x + "," + y);
+    }
+
+    public void takeMoveFromPlayer(){
+
+        boolean isChosenField = false;
+        int[] xYtable = null;
+        do {
+            do { xYtable = player.chooseCoordinates(); }
+            while(xYtable.length == 0);
+            int x = xYtable[0];
+            int y = xYtable[1];
+            isChosenField = board.markField(this.player, x, y);
+        }while (!isChosenField);
+    }
 }

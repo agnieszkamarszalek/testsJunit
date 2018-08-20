@@ -4,47 +4,43 @@ import ticTacToe.exceptions.WrongSignException;
 
 import java.util.Scanner;
 
-public class Player {
-    private Board board;
+public class Player implements PlayersInterface {
+
     private String XorO;
-
-    public void setScanner(Scanner scanner) {
-        this.scanner = scanner;
-    }
-
-    Scanner scanner;
+    private Scanner scanner;
 
     public Player(String XorO) {
         this.XorO = XorO;
         this.scanner = new Scanner(System.in);
     }
 
-    public String chooseField(){
-        System.out.println("Choose field. Give: x, y");
-        String  field = this.scanner.nextLine();
-        return field;
+    public void setScanner(Scanner scanner) {
+        this.scanner = scanner;
     }
 
-    public int[] splitParseMove(String field){
-        String[] results = field.split(",");
-
-        return new int[] {Integer.parseInt(results[0].trim()), Integer.parseInt(results[1].trim())};
-    }
-
-
-    public Board getBoard() {
-        return board;
-    }
-
-    public void setBoard(Board board) {
-        this.board = board;
-    }
-
+    @Override
     public String getXorO() {
         return XorO;
     }
 
-    public void setXorO(String xorO) {
-        XorO = xorO;
+    @Override
+    public int[] chooseCoordinates() {
+        String field = takeFieldFromPlayer();
+        String[] results = field.split(",");
+        int[] intsResult = null;
+        try {
+            intsResult = new int[]{Integer.parseInt(results[0].trim()), Integer.parseInt(results[1].trim())};
+        } catch (NumberFormatException e) {
+            System.out.println("Choose field using two numbers! ");
+            intsResult = new int[] {};
+        }
+
+        return intsResult;
+    }
+
+    public String takeFieldFromPlayer(){
+        System.out.println("Choose field. Give: x, y");
+        String  field = this.scanner.nextLine();
+        return field;
     }
 }

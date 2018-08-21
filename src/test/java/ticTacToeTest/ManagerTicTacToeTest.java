@@ -65,29 +65,29 @@ public class ManagerTicTacToeTest {
 //        assertThat(fieldToCheck).isEqualTo("O");
 //    }
 
-    @Test
-    public void shouldCheckMovesOrder(){
-        //given
-        Player mockPlayer = mock(Player.class);
-        ArtificialPlayer mockArtificialPlayer = mock(ArtificialPlayer.class);
-        ManagerTicTacToe managerTicTacToe = new ManagerTicTacToe("X");
-        managerTicTacToe.setPlayer(mockPlayer);
-        managerTicTacToe.setArtificialPlayer(mockArtificialPlayer);
-
-        when(mockPlayer.takeFieldFromPlayer()).thenReturn("1, 1");
-        when(mockPlayer
-                .chooseCoordinates())
-                .thenCallRealMethod();
-        when(mockArtificialPlayer.chooseCoordinates()).thenReturn(new int[]{1,2});
-
-        InOrder inOrder = inOrder(mockPlayer, mockArtificialPlayer);
-        //when
-        managerTicTacToe.playGame();
-
-        //then
-        inOrder.verify(mockPlayer).chooseCoordinates();
-        inOrder.verify(mockArtificialPlayer).chooseCoordinates();
-
-    }
+//    @Test
+//    public void shouldCheckMovesOrder(){
+//        //given
+//        Player mockPlayer = mock(Player.class);
+//        ArtificialPlayer mockArtificialPlayer = mock(ArtificialPlayer.class);
+//        ManagerTicTacToe managerTicTacToe = new ManagerTicTacToe("X");
+//        managerTicTacToe.setPlayer(mockPlayer);
+//        managerTicTacToe.setArtificialPlayer(mockArtificialPlayer);
+//
+//        when(mockPlayer.takeFieldFromPlayer()).thenReturn("1, 1");
+//        when(mockPlayer
+//                .chooseCoordinates())
+//                .thenCallRealMethod();
+//        when(mockArtificialPlayer.chooseCoordinates()).thenReturn(new int[]{1,2});
+//
+//        InOrder inOrder = inOrder(mockPlayer, mockArtificialPlayer);
+//        //when
+//        managerTicTacToe.playGame();
+//
+//        //then
+//        inOrder.verify(mockPlayer).chooseCoordinates();
+//        inOrder.verify(mockArtificialPlayer).chooseCoordinates();
+//
+//    }
 
 }

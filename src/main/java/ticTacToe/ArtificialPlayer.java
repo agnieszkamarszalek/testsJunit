@@ -1,8 +1,8 @@
 package ticTacToe;
 
 public class ArtificialPlayer implements PlayersInterface {
-    String XorO;
-    Board board;
+    private String XorO;
+    private Board board;
 
 
     public ArtificialPlayer(String xorO,Board board) {

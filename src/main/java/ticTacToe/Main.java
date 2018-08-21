@@ -7,7 +7,10 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+        ManagerTicTacToe managerTicTacToe = new ManagerTicTacToe("X");
         DisplayBoard displayBoard = new DisplayBoard(primaryStage);
+        displayBoard.setManagerTicTacToe(managerTicTacToe);
+        managerTicTacToe.setDisplayBoard(displayBoard);
         displayBoard.showBoardWhenPlay();
     }
 

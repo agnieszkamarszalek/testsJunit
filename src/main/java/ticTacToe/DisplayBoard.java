@@ -14,20 +14,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DisplayBoard {
-    private Board board;
     private Stage primaryStage;
-
-    public DisplayBoard(Board board, Stage primaryStage) {
-        this.board = board;
-        this.primaryStage = primaryStage;
-    }
+    private ManagerTicTacToe managerTicTacToe;
+    List<Button> buttons = new ArrayList<>();
 
     public DisplayBoard(Stage primaryStage) {
         this.primaryStage = primaryStage;
     }
 
-    public DisplayBoard(Board board) {
-        this.board = board;
+    public void setManagerTicTacToe(ManagerTicTacToe managerTicTacToe) {
+        this.managerTicTacToe = managerTicTacToe;
     }
 
     public void showBoardWhenPlay(){
@@ -39,14 +35,23 @@ public class DisplayBoard {
         gridPane.setPadding(new Insets(10,10,10,10));
 
         //buttons
-
-        List<Button> buttons = new ArrayList<>();
         for (int i = 0; i < 9; i++) {
             Button button = new Button();
             button.setAlignment(Pos.CENTER);
             button.setPrefSize(60,60);
             buttons.add(button);
         }
+
+        //buttons action
+        buttons.get(0).setOnAction( b -> managerTicTacToe.playGame("0,0"));
+        buttons.get(1).setOnAction( b -> managerTicTacToe.playGame("0,1"));
+        buttons.get(2).setOnAction( b -> managerTicTacToe.playGame("0,2"));
+        buttons.get(3).setOnAction( b -> managerTicTacToe.playGame("1,0"));
+        buttons.get(4).setOnAction( b -> managerTicTacToe.playGame("1,1"));
+        buttons.get(5).setOnAction( b -> managerTicTacToe.playGame("1,2"));
+        buttons.get(6).setOnAction( b -> managerTicTacToe.playGame("2,0"));
+        buttons.get(7).setOnAction( b -> managerTicTacToe.playGame("2,1"));
+        buttons.get(8).setOnAction( b -> managerTicTacToe.playGame("2,2"));
 
         //label
         Label mainLabel = new Label();
@@ -91,4 +96,13 @@ public class DisplayBoard {
         primaryStage.show();
 
     }
+
+    public void refreshBoard(String XorO, int x, int y) {
+
+        int whichButtonToSetText = x * 3 + y;
+        buttons.get(whichButtonToSetText).setText(XorO);
+    }
+
+
 }
+

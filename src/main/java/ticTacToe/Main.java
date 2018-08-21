@@ -1,9 +1,20 @@
 package ticTacToe;
 
-public class Main {
+import javafx.application.Application;
+import javafx.stage.Stage;
+
+public class Main extends Application {
+
+    @Override
+    public void start(Stage primaryStage) throws Exception{
+        DisplayBoard displayBoard = new DisplayBoard(primaryStage);
+        displayBoard.showBoardWhenPlay();
+    }
+
     public static void main(String[] args) {
 
-        ManagerTicTacToe managerTicTacToe = new ManagerTicTacToe("X");
-        managerTicTacToe.playGame();
+        launch(args);
     }
+
 }
+

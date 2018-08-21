@@ -60,7 +60,7 @@ public class ManagerTicTacToe {
         displayBoard.showBoardWhenPlay();
         while (true){
             System.out.println("Your move");
-            takeMoveFromPlayer();
+            takeMoveFromPlayer(this.player);
             displayBoard.showBoardWhenPlay();
                 if(!(" ").equals(checkIfGameIsOver.checkIsTheWinner(this.board.getMyBoard()))){
                     String isWinner = checkIfGameIsOver.checkIsTheWinner(this.board.getMyBoard());
@@ -72,7 +72,7 @@ public class ManagerTicTacToe {
                     return;
                 }
             System.out.println("Artificial player ");
-            takeMovesFromArtificialPlayer();
+            takeMoveFromPlayer(this.artificialPlayer);
             displayBoard.showBoardWhenPlay();
                 if(!(" ").equals(checkIfGameIsOver.checkIsTheWinner(this.board.getMyBoard()))){
                     String isWinner = checkIfGameIsOver.checkIsTheWinner(this.board.getMyBoard());
@@ -86,15 +86,7 @@ public class ManagerTicTacToe {
         }
     }
 
-    public void takeMovesFromArtificialPlayer(){
-        int[] xYtable = artificialPlayer.chooseCoordinates();
-        int x = xYtable[0];
-        int y = xYtable[1];
-        board.markField(this.artificialPlayer, x, y);
-        System.out.println("Artificial player tooks " + x + "," + y);
-    }
-
-    public void takeMoveFromPlayer(){
+    public void takeMoveFromPlayer(PlayersInterface player){
 
         boolean isChosenField = false;
         int[] xYtable = null;
@@ -103,7 +95,7 @@ public class ManagerTicTacToe {
             while(xYtable.length == 0);
             int x = xYtable[0];
             int y = xYtable[1];
-            isChosenField = board.markField(this.player, x, y);
+            isChosenField = board.markField(player, x, y);
         }while (!isChosenField);
     }
 }

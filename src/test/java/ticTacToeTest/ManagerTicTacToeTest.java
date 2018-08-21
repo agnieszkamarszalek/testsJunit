@@ -27,43 +27,43 @@ public class ManagerTicTacToeTest {
         assertThat(managerTicTacToe.getArtificialPlayer().getXorO()).isEqualTo("O");
     }
 
-    @Test
-    public void shouldTakeMoveFromPlayer(){
-        //given
-        Player mockPlayer = mock(Player.class);
-        ManagerTicTacToe managerTicTacToe = new ManagerTicTacToe("X");
+//    @Test
+//    public void shouldTakeMoveFromPlayer(){
+//        //given
+//        Player mockPlayer = mock(Player.class);
+//        ManagerTicTacToe managerTicTacToe = new ManagerTicTacToe("X");
+//
+//        //when
+//        when(mockPlayer.takeFieldFromPlayer()).thenReturn("1,1");
+//        when(mockPlayer.getXorO()).thenReturn("X");
+//        when(mockPlayer
+//                .chooseCoordinates())
+//                .thenCallRealMethod();
+//
+//        managerTicTacToe.setPlayer(mockPlayer);
+//        managerTicTacToe.takeMoveFromPlayer();
+//        String[][] boardToCheck = managerTicTacToe.getBoard().getMyBoard();
+//        String fieldToCheck = boardToCheck[1][1];
+//
+//        //then
+//        assertThat(fieldToCheck).isEqualTo("X");
+//    }
 
-        //when
-        when(mockPlayer.takeFieldFromPlayer()).thenReturn("1,1");
-        when(mockPlayer.getXorO()).thenReturn("X");
-        when(mockPlayer
-                .chooseCoordinates())
-                .thenCallRealMethod();
-
-        managerTicTacToe.setPlayer(mockPlayer);
-        managerTicTacToe.takeMoveFromPlayer();
-        String[][] boardToCheck = managerTicTacToe.getBoard().getMyBoard();
-        String fieldToCheck = boardToCheck[1][1];
-
-        //then
-        assertThat(fieldToCheck).isEqualTo("X");
-    }
-
-    @Test
-    public void shouldTakeMoveFromArtificialPlayer(){
-        //given
-        ManagerTicTacToe managerTicTacToe = new ManagerTicTacToe("X");
-        String[][] givenBoard = new String[][]{{"X","X","X"}, {"X"," ","X"}, {"X","X","X"}};
-        Board board = new Board(givenBoard);
-        managerTicTacToe.setBoard(board);
-
-        //when
-        managerTicTacToe.takeMovesFromArtificialPlayer();
-        String fieldToCheck = givenBoard[1][1];
-
-        //then
-        assertThat(fieldToCheck).isEqualTo("O");
-    }
+//    @Test
+//    public void shouldTakeMoveFromArtificialPlayer(){
+//        //given
+//        ManagerTicTacToe managerTicTacToe = new ManagerTicTacToe("X");
+//        String[][] givenBoard = new String[][]{{"X","X","X"}, {"X"," ","X"}, {"X","X","X"}};
+//        Board board = new Board(givenBoard);
+//        managerTicTacToe.setBoard(board);
+//
+//        //when
+//        managerTicTacToe.takeMovesFromArtificialPlayer();
+//        String fieldToCheck = givenBoard[1][1];
+//
+//        //then
+//        assertThat(fieldToCheck).isEqualTo("O");
+//    }
 
     @Test
     public void shouldCheckMovesOrder(){

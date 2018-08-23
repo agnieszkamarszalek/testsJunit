@@ -59,7 +59,7 @@ public class ManagerTicTacToe {
         this.artificialPlayer = artificialPlayer;
     }
 
-    public String playGame(String coordinates) {
+    public void playGame(String coordinates) {
         //player
         String[] coordinatesStringArray = coordinates.split(",");
         int[] coordinatesIntArray = {Integer.parseInt(coordinatesStringArray[0]), Integer.parseInt(coordinatesStringArray[1])};
@@ -67,11 +67,16 @@ public class ManagerTicTacToe {
         displayBoard.refreshBoard(this.player.getXorO(), coordinatesIntArray[0], coordinatesIntArray[1]);
         String isWinner = checkIfGameIsOver.checkIsTheWinner(this.board.getMyBoard());
         if(!" ".equals(isWinner)) {
-            return isWinner;
+            WinningFields winningFields = checkIfGameIsOver.chooseWinningFields(this.board.getMyBoard());
+            displayBoard.markWinningFields(winningFields);
+            displayBoard.changeText("The winner is " + isWinner + " !!!" + " Game is over !");
+            return;
         }
         boolean isGameOver = checkIfGameIsOver.checkAreAllFieldsTaken(this.board.getMyBoard());
         if(isGameOver) {
-            return "Game is over";
+
+            displayBoard.changeText("Game is over !");
+            return;
         }
         //artificialPlayer
         int[] coordinatesArtificialPlayer = artificialPlayer.chooseCoordinates();
@@ -79,50 +84,18 @@ public class ManagerTicTacToe {
         displayBoard.refreshBoard(artificialPlayer.getXorO(), coordinatesArtificialPlayer[0], coordinatesArtificialPlayer[1]);
         String isWinnerArtificialPlayer = checkIfGameIsOver.checkIsTheWinner(this.board.getMyBoard());
         if(!" ".equals(isWinner)) {
-            return isWinner;
+            displayBoard.changeText("The winner is " + isWinner + "!!!" + "Game is over !");
+            return;
         }
         boolean isGameOver2 = checkIfGameIsOver.checkAreAllFieldsTaken(board.getMyBoard());
         if(isGameOver2) {
-            return "Game is over";
+            displayBoard.changeText("Game is over !");
+            return;
         }
 
-
-
-        return " ";
     }
 
-//    public void playGame(){
-//        displayBoard.showBoardWhenPlay();
-//        while (true){
-//            System.out.println("Your move");
-//            takeMoveFromPlayer(this.player);
-//            displayBoard.showBoardWhenPlay();
-//                if(!(" ").equals(checkIfGameIsOver.checkIsTheWinner(this.board.getMyBoard()))){
-//                    String isWinner = checkIfGameIsOver.checkIsTheWinner(this.board.getMyBoard());
-//                    System.out.println("The winner is " + isWinner);
-//                    return;
-//                }
-//                if(checkIfGameIsOver.checkAreAllFieldsTaken(this.board.getMyBoard())){
-//                    System.out.println("Game over.");
-//                    return;
-//                }
-//            System.out.println("Artificial player ");
-//            takeMoveFromPlayer(this.artificialPlayer);
-//            displayBoard.showBoardWhenPlay();
-//                if(!(" ").equals(checkIfGameIsOver.checkIsTheWinner(this.board.getMyBoard()))){
-//                    String isWinner = checkIfGameIsOver.checkIsTheWinner(this.board.getMyBoard());
-//                    System.out.println("The winner is " + isWinner);
-//                    return;
-//                }
-//                if(checkIfGameIsOver.checkAreAllFieldsTaken(this.board.getMyBoard())){
-//                    System.out.println("Game over.");
-//                    return;
-//                }
-//        }
-//    }
-
     public void takeMoveFromPlayer(PlayersInterface player){
-
         boolean isChosenField = false;
         int[] xYtable = null;
         do {
@@ -131,6 +104,6 @@ public class ManagerTicTacToe {
             int x = xYtable[0];
             int y = xYtable[1];
             isChosenField = board.markField(player, x, y);
-        }while (!isChosenField);
+        } while (!isChosenField);
     }
 }

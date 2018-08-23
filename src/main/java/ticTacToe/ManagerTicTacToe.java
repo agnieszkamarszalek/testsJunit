@@ -60,40 +60,34 @@ public class ManagerTicTacToe {
     }
 
     public void playGame(String coordinates) {
+
         //player
         String[] coordinatesStringArray = coordinates.split(",");
         int[] coordinatesIntArray = {Integer.parseInt(coordinatesStringArray[0]), Integer.parseInt(coordinatesStringArray[1])};
-        board.markField(this.player, coordinatesIntArray[0], coordinatesIntArray[1]);
-        displayBoard.refreshBoard(this.player.getXorO(), coordinatesIntArray[0], coordinatesIntArray[1]);
+        if (makeMove(coordinatesIntArray, this.player)) return;
+
+        //artificialPlayer
+        int[] coordinatesArtificialPlayer = artificialPlayer.chooseCoordinates();
+        if (makeMove(coordinatesArtificialPlayer, this.artificialPlayer)) return;
+
+    }
+
+    private boolean makeMove(int[] coordinatesIntArray, PlayersInterface currentPlayer) {
+        board.markField(currentPlayer, coordinatesIntArray[0], coordinatesIntArray[1]);
+        displayBoard.refreshBoard(currentPlayer.getXorO(), coordinatesIntArray[0], coordinatesIntArray[1]);
         String isWinner = checkIfGameIsOver.checkIsTheWinner(this.board.getMyBoard());
         if(!" ".equals(isWinner)) {
             WinningFields winningFields = checkIfGameIsOver.chooseWinningFields(this.board.getMyBoard());
             displayBoard.markWinningFields(winningFields);
             displayBoard.changeText("The winner is " + isWinner + " !!!" + " Game is over !");
-            return;
+            return true;
         }
         boolean isGameOver = checkIfGameIsOver.checkAreAllFieldsTaken(this.board.getMyBoard());
         if(isGameOver) {
-
             displayBoard.changeText("Game is over !");
-            return;
+            return true;
         }
-        //artificialPlayer
-        int[] coordinatesArtificialPlayer = artificialPlayer.chooseCoordinates();
-        this.board.markField(artificialPlayer, coordinatesArtificialPlayer[0], coordinatesArtificialPlayer[1]);
-        displayBoard.refreshBoard(artificialPlayer.getXorO(), coordinatesArtificialPlayer[0], coordinatesArtificialPlayer[1]);
-        String isWinnerArtificialPlayer = checkIfGameIsOver.checkIsTheWinner(this.board.getMyBoard());
-        if(!" ".equals(isWinnerArtificialPlayer)) {
-            WinningFields winningFields = checkIfGameIsOver.chooseWinningFields(this.board.getMyBoard());
-            displayBoard.markWinningFields(winningFields);
-            displayBoard.changeText("The winner is " + isWinnerArtificialPlayer + " !!!" + " Game is over !");
-            return;
-        }
-        boolean isGameOver2 = checkIfGameIsOver.checkAreAllFieldsTaken(board.getMyBoard());
-        if(isGameOver2) {
-            displayBoard.changeText("Game is over !");
-            return;
-        }
+        return false;
     }
 
     public void restartGame() {

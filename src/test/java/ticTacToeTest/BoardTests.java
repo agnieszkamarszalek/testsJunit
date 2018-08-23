@@ -76,6 +76,20 @@ public class BoardTests {
         //then
         assertThat(tryTakeField).isEqualTo(false);
     }
+
+    @Test
+    public void shouldMarkEmptyFieldsOnBoard () {
+        //given
+        String[][] rawBoard = {{"X", "O", "X"},{" ", "X", " "}, {" ", " ", "X"}};
+        String[][] expectedBoard = {{" ", " ", " "},{" ", " ", " "}, {" ", " ", " "}};
+        Board board = new Board (rawBoard);
+
+        //when
+        board.setEmptyFieldsOnBoard();
+
+        //then
+        assertThat(expectedBoard).isEqualTo(board.getMyBoard());
+    }
 }
 
 

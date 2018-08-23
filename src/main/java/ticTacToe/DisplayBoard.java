@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.shape.Line;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
@@ -45,6 +46,12 @@ public class DisplayBoard {
             buttons.add(button);
         }
 
+        //restartGame button
+        Button restartGameButton = new Button();
+        restartGameButton.setText("Restart game");
+        restartGameButton.setAlignment(Pos.CENTER);
+        restartGameButton.setOnAction( b -> managerTicTacToe.restartGame());
+
         //buttons action
         buttons.get(0).setOnAction( b -> managerTicTacToe.playGame("0,0"));
         buttons.get(1).setOnAction( b -> managerTicTacToe.playGame("0,1"));
@@ -58,17 +65,13 @@ public class DisplayBoard {
 
         //label
         mainLabel = new Label();
-
-        mainLabel.setStyle("-fx-background-color: chartreuse");
         mainLabel.setText("Let's play a game!");
-        mainLabel.setTextAlignment(TextAlignment.CENTER); // ???
+        mainLabel.setAlignment(Pos.CENTER);
 
         //gridpane with board
-//        gridPane.setMargin(new Insets(10,10,10,10));
         gridPane.setAlignment(Pos.TOP_CENTER);
 
-        //constraints gridpane
-        //gridPane.setConstraints(mainLabel, 0, 0, 3, 3, HPos.CENTER, VPos.CENTER);
+        //constraints gridpane with board
         gridPane.setConstraints(buttons.get(0), 0, 0 );
         gridPane.setConstraints(buttons.get(1), 1,0);
         gridPane.setConstraints(buttons.get(2), 2,0);
@@ -79,24 +82,34 @@ public class DisplayBoard {
         gridPane.setConstraints(buttons.get(7), 1,2);
         gridPane.setConstraints(buttons.get(8), 2,2);
 
-        Line line = new Line(0,0,100,100);
         gridPane.getChildren().addAll( buttons.get(0), buttons.get(1), buttons.get(2), buttons.get(3), buttons.get(4),
                 buttons.get(5), buttons.get(6), buttons.get(7), buttons.get(8));
-        gridPane.setPadding(new Insets(10,10,10,10));
+        gridPane.setPadding(new Insets(10,10,20,10));
+
+        //bottom hBox
+        HBox hBox = new HBox();
+        hBox.getChildren().add(restartGameButton);
+        hBox.setAlignment(Pos.CENTER);
+        hBox.setPadding(new Insets(0,10,20,10));
+
+        //top hbox
+        HBox topHbox = new HBox();
+        topHbox.getChildren().add(mainLabel);
+        topHbox.setAlignment(Pos.CENTER);
+
         //borderPane
         BorderPane borderPane = new BorderPane();
         borderPane.setPadding(new Insets(10,10,10,10));
         borderPane.setCenter(gridPane);
-        borderPane.setTop(mainLabel);
-        mainLabel.setAlignment(Pos.CENTER);
-
-
+        borderPane.setTop(topHbox);
+        borderPane.setBottom(hBox);
 
         //scene
-        Scene scene = new Scene(borderPane, 300, 300);
-        mainLabel.setPrefWidth(scene.getWidth());
-        mainLabel.setPrefHeight(scene.getHeight()/5);
+        Scene scene = new Scene(borderPane, 300, 350);
         mainLabel.setPadding(new Insets(10,10,10,10));
+        restartGameButton.setPrefWidth(scene.getWidth()/3);
+        restartGameButton.setPrefHeight(scene.getHeight()/10);
+
         primaryStage.setScene(scene);
         primaryStage.show();
 
@@ -165,6 +178,16 @@ public class DisplayBoard {
                 break;
                 
         }
+    }
+
+
+    public void resetButtons() {
+        for (Button button : buttons ) {
+            button.setText(" ");
+            button.setDisable(false);
+            button.setStyle("");
+        }
+
     }
 }
 

@@ -6,16 +6,19 @@ public class Board {
     private String[][] myBoard = new String[3][3];
 
     public Board() {
+        setEmptyFieldsOnBoard();
+    }
 
+    public Board(String[][] myBoard) {
+        this.myBoard = myBoard;
+    }
+
+    public void setEmptyFieldsOnBoard () {
         for (int i = 0; i < myBoard.length ; i++) {
             for (int j = 0; j < myBoard[i].length; j++) {
                 myBoard[i][j] = " ";
             }
         }
-    }
-
-    public Board(String[][] myBoard) {
-        this.myBoard = myBoard;
     }
 
     public boolean markField(PlayersInterface player, int row, int column) {
